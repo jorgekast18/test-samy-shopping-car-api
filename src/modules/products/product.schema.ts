@@ -14,6 +14,12 @@ export class Product extends Document {
     @Prop({ required: true })
     name: string;
 
+    @Prop({ required: false})
+    description: string;
+
+    @Prop({ required: false})
+    location: string;
+
     @Prop({ required: true })
     price: number;
 
