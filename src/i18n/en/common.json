@@ -1,3 +1,5 @@
 {
-    "product_name_required": "The product name is required."
+    "productNameRequired": "The product name is required.",
+    "productPriceRequired": "Product price is required.",
+    "stockRequired": "The stock amount is requred."
 }

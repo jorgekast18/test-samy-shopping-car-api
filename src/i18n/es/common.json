@@ -1,3 +1,5 @@
 {
-    "product_name_required": "El nombre del producto es obligatorio."
+    "productNameRequired": "El nombre del producto es obligatorio.",
+    "productPriceRequired": "El precio del producto es obligatorio.",
+    "stockRequired": "La cantidad de productos en inventario es obligatoria."
 }
