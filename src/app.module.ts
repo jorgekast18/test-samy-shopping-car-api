@@ -1,14 +1,15 @@
-import { Module } from '@nestjs/common';
+import { Inject, Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { MongooseModule } from '@nestjs/mongoose';
-import { databaseConfig } from './config';
+import { DatabaseModule } from './database/database.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    MongooseModule.forRootAsync({
-      useFactory: async () => (databaseConfig)
-    })
+    ConfigModule.forRoot({
+      isGlobal: true
+    }),
+    DatabaseModule
   ],
   controllers: [AppController],
   providers: [AppService],
