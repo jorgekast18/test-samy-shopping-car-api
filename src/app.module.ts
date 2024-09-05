@@ -15,7 +15,7 @@ import { LocaleMiddleware } from './common/middleware/locale.middleware';
     I18nModule.forRoot({
       fallbackLanguage: 'en',
       loaderOptions: {
-        path: join(__dirname, '/i18n/'),
+        path: join(__dirname, '/i18n/'), 
         watch: true,
       },
       resolvers: [
@@ -40,8 +40,11 @@ import { LocaleMiddleware } from './common/middleware/locale.middleware';
         transform: true,
         whitelist: true,
         exceptionFactory: (errors) => {
-          const adapter = new I18nValidationAdapter(i18n);
-          const errorMessages = errors.map(err => adapter.defaultMessage(err));
+          const errorMessages = errors.map(err => {
+            const property = err.property;
+            const constraints = Object.values(err.constraints || {});
+            return constraints.length ? constraints[0] : `Error: ${property}`;
+          });
           return new Error(errorMessages.join(', '));
         }
       }),
