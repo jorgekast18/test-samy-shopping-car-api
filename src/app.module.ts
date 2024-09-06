@@ -9,6 +9,7 @@ import { ProductsModule } from './modules/products/products.module';
 import { APP_PIPE } from '@nestjs/core';
 import { LocaleMiddleware } from './common/middleware/locale.middleware';
 import { ValidationPipe } from './common/pipes/validation.pipe'; // Ajusta la ruta según tu estructura
+import { CartModule } from './modules/cart/cart.module';
 
 @Module({
   imports: [
@@ -28,6 +29,7 @@ import { ValidationPipe } from './common/pipes/validation.pipe'; // Ajusta la ru
     }),
     DatabaseModule,
     ProductsModule,
+    CartModule,
   ],
   controllers: [AppController],
   providers: [
