@@ -68,6 +68,10 @@ export class CreateProductDto {
     @IsNotEmpty({ message: 'productTypeRequired'})
     @IsMongoId({ message: 'mustBeValidId'})
     productType: string;
+    
+    @ApiProperty({ description: 'Foto del producto.', example: 'foto1.jpg' })
+    @IsOptional()
+    thumbnail?: string;
 }
 
 export class UpdateProductDto {
@@ -96,6 +100,10 @@ export class UpdateProductDto {
     @IsOptional()
     @IsMongoId({ message: 'mustBeValidId'})
     productType?: string;
+
+    @ApiProperty({ description: 'Foto del producto.', example: 'foto1.jpg' })
+    @IsOptional()
+    thumbnail?: string;
 }
 
 export class CreateProductTypeDto {

@@ -27,6 +27,9 @@ export class Product extends Document {
     @Prop({ required: true })
     stock: number
 
+    @Prop({ required: true, default: '' })
+    thumbnail: string
+
     @Prop({ type: Schema.Types.ObjectId, ref: 'ProductType', required: true })
     productType: ProductType;
 }
