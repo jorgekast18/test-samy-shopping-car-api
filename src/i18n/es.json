@@ -20,5 +20,6 @@
     "cartNotFound": "El carrito de compras no fue encontrado.",
     "insufficientsProducts": "La cantidad de productos que desea agregar superan la cantidad de productos disponibles",
     "productAddedSuccess": "Producto agregado al carrito.",
-    "cartFinishedSuccess": "El carrito se ha cerrado exitosamente."
+    "cartFinishedSuccess": "El carrito se ha cerrado exitosamente.",
+    "productRemovedSuccess": "El producto fue removido exitosamente."
 }

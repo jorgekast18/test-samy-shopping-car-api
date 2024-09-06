@@ -5,13 +5,11 @@ import { I18nService } from 'nestjs-i18n';
 import { Model } from 'mongoose';
 import { CartDto } from './dto/cart.dto';
 import { ResponseApiDto } from 'src/common/dto/response-api.dto';
-import { ok } from 'assert';
 import { ProductCartDto } from './dto/product-cart.dto';
 import { ProductService } from '../products/product.service';
 import { Product } from '../products/schemas/product.schema';
 import { canAddQuantityProductInCart, getIndexIfProductExistInCart } from './utils/utils-cart';
 import { CartState } from './dto/cart-state.enum';
-import { ProductDto } from '../products/dto/product.dto';
 
 @Injectable()
 export class CartService {
@@ -64,7 +62,7 @@ export class CartService {
 
     async addProduct(cartId: string, productCartToAdd: ProductCartDto): Promise<ResponseApiDto> {
         const cart: Cart = await this.findOne(cartId);
-        const productInDb: Product = await this.productService.findOne(productCartToAdd.productId); 
+        const productInDb: Product = await this.productService.findOne(productCartToAdd.productId);
         const total = productCartToAdd.quantity * productCartToAdd.price;
 
         cart.state = CartState.FULL;
@@ -97,6 +95,43 @@ export class CartService {
             data: cart
           }
         return response;
+    }
+
+    async decreaseProductInCart(cartId: string, producIdtCartToDecrease: string): Promise<ResponseApiDto> {
+        const cart: Cart = await this.findOne(cartId);
+        const indexProductInCart: number = getIndexIfProductExistInCart(cart, producIdtCartToDecrease);
+
+        if(indexProductInCart > -1){
+            cart.items[indexProductInCart].quantity -= 1;
+
+            if(cart.items[indexProductInCart].quantity === 0){
+                return await this.removeProduct(cartId, producIdtCartToDecrease);
+            }
+            cart.items[indexProductInCart].total = cart.items[indexProductInCart].quantity * cart.items[indexProductInCart].price;
+            return await this.update(cartId, cart);
+        }else {
+            throw new BadRequestException(`${this.i18n.translate('productNotFound')}`);
+        }
+    }
+
+    async removeProduct(cartId: string, producIdtCartToRemove: string): Promise<ResponseApiDto>{
+        const cart: Cart = await this.findOne(cartId);
+        const indexProductInCart: number = getIndexIfProductExistInCart(cart, producIdtCartToRemove);
+
+        if(indexProductInCart > -1){
+            cart.items.splice(indexProductInCart, 1);
+            await this.update(cartId, cart);
+
+            const response: ResponseApiDto = {
+                ok: true,
+                statusCode: 200,
+                message: `${this.i18n.translate('productRemovedSuccess')}`,
+                data: cart
+              }
+            return response;
+        }else {
+            throw new BadRequestException(`${this.i18n.translate('productNotFound')}`);
+        }
     }
 
     async finishedCart(cartId: string): Promise<ResponseApiDto> {

@@ -40,6 +40,20 @@ export class CartController {
         return this.cartService.addProduct(cartId, productCartDto);
     }
 
+    @Patch('decrease-product/:id')
+    @ApiOperation({ summary: 'Decrementa un producto del carrito. Si la cantidad queda en 0, elimina el producto del carrito.'})
+    @ApiResponse({ status: 201, description: 'Producto decrementado del carrito correctamente.', type: CartDto})
+    async decreaseProduct(@Body() productId: string, @Param('id') cartId: string): Promise<ResponseApiDto> {
+        return this.cartService.decreaseProductInCart(cartId, productId);
+    }
+
+    @Patch('remove-product/:id')
+    @ApiOperation({ summary: 'Elimina un producto del carrito.'})
+    @ApiResponse({ status: 201, description: 'Producto eliminado del carrito correctamente.', type: CartDto})
+    async removeProduct(@Body() productId: string, @Param('id') cartId: string): Promise<ResponseApiDto> {
+        return this.cartService.removeProduct(cartId, productId);
+    }
+
     @Patch('finished/:id')
     @ApiOperation({ summary: 'Cerrar un carrito de compra, cambia de estado para indicar que ya fue pagado y se convierte en factura'})
     @ApiResponse({ status: 201, description: 'Carrito finalizado correctamente', type: CartDto})

@@ -2,9 +2,14 @@ import { Product } from "src/modules/products/schemas/product.schema";
 import { Cart } from "../schema/cart.schema";
 import { ProductCartDto } from "../dto/product-cart.dto";
 
-export const getIndexIfProductExistInCart = (cart: Cart, product: ProductCartDto): number => {
+export const getIndexIfProductExistInCart = (cart: Cart, product: ProductCartDto | string): number => {
   const index = cart.items.findIndex((item: ProductCartDto) => {
-    return item.productId.toString() === product.productId.toString();
+    if(typeof(product) === 'string'){
+      return item.productId.toString() === product;
+    }else {
+      return item.productId.toString() === product.productId.toString();
+    }
+    
   });
 
   return index;
