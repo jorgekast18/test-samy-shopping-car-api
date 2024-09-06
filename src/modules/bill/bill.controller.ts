@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { BillService } from './bill.service';
 import { Bill } from './schema/bill.schema';
@@ -10,7 +10,7 @@ export class BillController {
 
     @Get()
     @ApiOperation({ summary: 'Obtener todas las facturas'})
-    @ApiResponse({ status: 200, description: 'Listado de facturas', type: Bill})
+    @ApiResponse({ status: 200, description: 'Listado de facturas', type: [Bill]})
     async findAll(): Promise<Bill[]> {
         return this.billService.findAll();
     }

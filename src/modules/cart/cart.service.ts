@@ -10,13 +10,16 @@ import { ProductService } from '../products/product.service';
 import { Product } from '../products/schemas/product.schema';
 import { canAddQuantityProductInCart, getIndexIfProductExistInCart } from './utils/utils-cart';
 import { CartState } from './dto/cart-state.enum';
+import { BillDto } from '../bill/dto/bill.dto';
+import { BillService } from '../bill/bill.service';
 
 @Injectable()
 export class CartService {
     constructor(
         @InjectModel(Cart.name) private cartModel: Model<CartDocument>,
         private readonly i18n: I18nService,
-        private readonly productService: ProductService
+        private readonly productService: ProductService,
+        private readonly billService: BillService
     ) {}
 
     async create(): Promise<ResponseApiDto>{
@@ -140,6 +143,13 @@ export class CartService {
         // Update state cart
         cart.state = CartState.FINISHED;
         await this.update(cartId, cart);
+
+        const billToCreate: BillDto = {
+            products: cart.items,
+            clientName: 'Juan lozano'
+        }
+
+        await this.billService.create(billToCreate);
 
         // Update every product stock in cart
         if(cart.items.length > 0){

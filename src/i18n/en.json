@@ -21,5 +21,6 @@
     "insufficientsProducts": "The number of products you wish to add exceeds the number of products available",
     "productAddedSuccess": "Product added success to cart.",
     "cartFinishedSuccess": "Cart was finished success.",
-    "productRemovedSuccess": "The product was removed success."
+    "productRemovedSuccess": "The product was removed success.",
+    "createdBillSuccess": "The bill was created success"
 }
