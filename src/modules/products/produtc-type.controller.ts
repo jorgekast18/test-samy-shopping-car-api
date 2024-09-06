@@ -3,6 +3,7 @@ import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ProductTypeService } from './product-type.service';
 import { CreateProductTypeDto } from './dto/product.dto';
 import { ProductType } from './schemas/product.schema';
+import { ResponseApiDto } from 'src/common/dto/response-api.dto';
 
 @ApiTags('Products Types')
 @Controller('product-types')
@@ -13,7 +14,7 @@ export class ProductTypesController {
   @ApiOperation({ summary: 'Crear un nuevo tipo de producto' })
   @ApiResponse({ status: 201, description: 'Tipo de producto creado exitosamente.', type: ProductType })
   @ApiResponse({ status: 400, description: 'Solicitud incorrecta.' })
-  async create(@Body() createProductTypeDto: CreateProductTypeDto): Promise<ProductType> {
+  async create(@Body() createProductTypeDto: CreateProductTypeDto): Promise<ResponseApiDto> {
     return this.productTypeService.create(createProductTypeDto);
   }
 
@@ -36,7 +37,7 @@ export class ProductTypesController {
   @ApiOperation({ summary: 'Actualizar un tipo de producto por ID' })
   @ApiResponse({ status: 200, description: 'Tipo de producto actualizado.', type: ProductType })
   @ApiResponse({ status: 404, description: 'Tipo de producto no encontrado.' })
-  async update(@Param('id') id: string, @Body() updateProductTypeDto: CreateProductTypeDto): Promise<ProductType> {
+  async update(@Param('id') id: string, @Body() updateProductTypeDto: CreateProductTypeDto): Promise<ResponseApiDto> {
     return this.productTypeService.update(id, updateProductTypeDto);
   }
 

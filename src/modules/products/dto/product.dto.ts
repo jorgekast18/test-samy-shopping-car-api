@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsMongoId, Min } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsMongoId, Min, IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ProductDto {
@@ -81,16 +81,19 @@ export class UpdateProductDto {
     location?: string;
 
     @ApiProperty({ description: 'Precio del producto', example: 100 })
+    @IsOptional()
     @Min(0, { message: 'minValueZero'})
     @IsNumber({ }, { message: 'mustBeNumber'})
     price?: number;
 
     @ApiProperty({ description: 'Cantidad de unidades en inventario', example: 100 })
+    @IsOptional()
     @Min(0, { message: 'minValueZero'})
     @IsNumber({ }, { message: 'mustBeNumber'})
     stock?: number;
 
     @ApiProperty({ description: 'ID del tipo de producto', example: '60b8d295f1a2c34c7d1e8c4e' })
+    @IsOptional()
     @IsMongoId({ message: 'mustBeValidId'})
     productType?: string;
 }

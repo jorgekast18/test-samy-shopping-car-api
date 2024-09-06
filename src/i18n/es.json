@@ -7,5 +7,9 @@
     "mustBeNumber": "El valor de {property} debe ser un número.",
     "minValueZero": "El valor mínimo de {property} debe ser: 0.",
     "productTypeRequired": "El tipo de producto es obligatorio.",
-    "mustBeValidId": "{property} debe ser un id válido."
+    "mustBeValidId": "{property} debe ser un id válido.",
+    "productNotFound": "Producto no encontrado.",
+    "upadtedProduct": "El producto fue actualizado exitosamente.",
+    "createdProductTypeSuccess": "El tipo de producto fue creado exitosamente.",
+    "productTypeNotFound": "Tipo de producto no encontrado."
 }

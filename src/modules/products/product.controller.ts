@@ -37,7 +37,7 @@ export class ProductsController {
   @ApiOperation({ summary: 'Actualizar un producto por ID' })
   @ApiResponse({ status: 200, description: 'Producto actualizado.', type: Product })
   @ApiResponse({ status: 404, description: 'Producto no encontrado.' })
-  async update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto): Promise<Product> {
+  async update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto): Promise<ResponseApiDto> {
     return this.productService.update(id, updateProductDto);
   }
 

@@ -7,5 +7,9 @@
     "mustBeNumber": "This value {property} must be a number.",
     "minValueZero": "The min value of {property} must be 0.",
     "productTypeRequired": "The product type is required.",
-    "mustBeValidId": "{property} must be a valid id."
+    "mustBeValidId": "{property} must be a valid id.",
+    "productNotFound": "Product not found.",
+    "upadtedProduct": "Product was updated success.",
+    "createdProductTypeSuccess": "The product type was created success.",
+    "productTypeNotFound": "Product type not found."
 }

@@ -1,0 +1,17 @@
+meta {
+  name: Update Product Type
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:3000/api/v1/product-types/66da68ba2719f996ccdc8872
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Producto 2.0"
+  }
+}

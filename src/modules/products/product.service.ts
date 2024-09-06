@@ -27,7 +27,7 @@ export class ProductService {
 
         return response;
     } catch (error){
-      
+      console.log('Error during create product ', error);
     }
   }
 
@@ -38,25 +38,31 @@ export class ProductService {
   async findOne(id: string): Promise<Product> {
     const product = await this.productModel.findById(id).exec();
     if (!product) {
-      throw new NotFoundException(`Product with ID ${id} not found`);
+      throw new NotFoundException(`${this.i18n.translate('productNotFound')}`);
     }
     return product;
   }
 
-  async update(id: string, updateProductDto: UpdateProductDto): Promise<Product> {
+  async update(id: string, updateProductDto: UpdateProductDto): Promise<ResponseApiDto> {
     const updatedProduct = await this.productModel
       .findByIdAndUpdate(id, updateProductDto, { new: true })
       .exec();
     if (!updatedProduct) {
-      throw new NotFoundException(`Product with ID ${id} not found`);
+      throw new NotFoundException(`${this.i18n.translate('productNotFound')}`);
     }
-    return updatedProduct;
+    const response: ResponseApiDto = {
+      ok: true,
+      statusCode: 200,
+      message: `${this.i18n.translate('upadtedProduct')}`,
+      data: updatedProduct
+    }
+    return response;
   }
 
   async remove(id: string): Promise<void> {
     const result = await this.productModel.findByIdAndDelete(id).exec();
     if (!result) {
-      throw new NotFoundException(`Product with ID ${id} not found`);
+      throw new NotFoundException(`${this.i18n.translate('productNotFound')}`);
     }
   }
 }

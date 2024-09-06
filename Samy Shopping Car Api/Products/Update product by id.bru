@@ -1,0 +1,17 @@
+meta {
+  name: Update product by id
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:3000/api/v1/products/66da69a38f743f87a991547f
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Gafas de sol Rayban"
+  }
+}
