@@ -7,6 +7,7 @@ export class ProductType extends Document {
     name: string
 }
 
+export type ProductDocument = Product & Document;
 export const ProductTypeSchema = SchemaFactory.createForClass(ProductType);
 
 @NestSchema()
@@ -30,4 +31,5 @@ export class Product extends Document {
     productType: ProductType;
 }
 
+export type ProductTypeDocument = ProductType & Document;
 export const ProductSchema = SchemaFactory.createForClass(Product);

@@ -12,6 +12,7 @@ export class I18nValidationAdapter implements ValidatorConstraintInterface {
   }
 
   defaultMessage(args: ValidationArguments): string {
+    console.log('llego aqui');
     const locale = args?.object?.['locale'] || 'es';
     const key = `validation.${args.property}`;
     return this.i18n.translate(key, { lang: locale });

@@ -1,11 +1,8 @@
-import { IsNotEmpty, IsNumber, IsMongoId } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsMongoId, Min } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { I18nService } from 'nestjs-i18n';
 
 export class CreateProductDto {
-    constructor(private readonly i18n: I18nService) {}
-
-    @ApiProperty({ description: 'Nombre del tipo de producto', example: 'Gafas de sol' })
+    @ApiProperty({ description: 'Nombre del producto', example: 'Gafas de sol' })
     @IsNotEmpty({ message: 'productNameRequired' })
     name: string;
 
@@ -17,18 +14,20 @@ export class CreateProductDto {
 
     @ApiProperty({ description: 'Precio del producto', example: 100 })
     @IsNotEmpty({ message: 'productPriceRequired'})
-    @IsNumber()
+    @IsNumber({ }, { message: 'mustBeNumber'})
+    @Min(0, { message: 'minValueZero'})
     price: number;
 
     @ApiProperty({ description: 'Cantidad de unidades en inventario', example: 100 })
     @IsNotEmpty({ message: 'stockRequired'})
-    @IsNumber()
+    @Min(0, { message: 'minValueZero'})
+    @IsNumber({ }, { message: 'mustBeNumber'})
     stock: number;
 
     @ApiProperty({ description: 'ID del tipo de producto', example: '60b8d295f1a2c34c7d1e8c4e' })
-    @IsNotEmpty()
-    @IsMongoId()
-    typeProduct: string;
+    @IsNotEmpty({ message: 'productTypeRequired'})
+    @IsMongoId({ message: 'mustBeValidId'})
+    productType: string;
 }
 
 export class UpdateProductDto {
@@ -42,14 +41,23 @@ export class UpdateProductDto {
     location?: string;
 
     @ApiProperty({ description: 'Precio del producto', example: 100 })
-    @IsNumber()
+    @Min(0, { message: 'minValueZero'})
+    @IsNumber({ }, { message: 'mustBeNumber'})
     price?: number;
 
     @ApiProperty({ description: 'Cantidad de unidades en inventario', example: 100 })
-    @IsNumber()
+    @Min(0, { message: 'minValueZero'})
+    @IsNumber({ }, { message: 'mustBeNumber'})
     stock?: number;
 
     @ApiProperty({ description: 'ID del tipo de producto', example: '60b8d295f1a2c34c7d1e8c4e' })
-    @IsMongoId()
-    typeProduct?: string;
+    @IsMongoId({ message: 'mustBeValidId'})
+    productType?: string;
+}
+
+export class CreateProductTypeDto {
+
+    @ApiProperty({ description: 'Nombre del tipo de producto', example: 'Evento' })
+    @IsNotEmpty({ message: 'productTypeNameRequired' })
+    name: string;
 }

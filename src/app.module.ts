@@ -1,5 +1,5 @@
-import { MiddlewareConsumer, Module, NestModule, ValidationPipe } from '@nestjs/common';
-import { I18nModule, QueryResolver, AcceptLanguageResolver, I18nService } from 'nestjs-i18n';
+import { Module, NestModule, MiddlewareConsumer } from '@nestjs/common';
+import { I18nModule, QueryResolver, AcceptLanguageResolver } from 'nestjs-i18n';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -7,49 +7,35 @@ import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { ProductsModule } from './modules/products/products.module';
 import { APP_PIPE } from '@nestjs/core';
-import { I18nValidationAdapter } from './common/validation/i18n-validation.adapter';
 import { LocaleMiddleware } from './common/middleware/locale.middleware';
+import { ValidationPipe } from './common/pipes/validation.pipe'; // Ajusta la ruta según tu estructura
 
 @Module({
   imports: [
     I18nModule.forRoot({
       fallbackLanguage: 'en',
       loaderOptions: {
-        path: join(__dirname, '/i18n/'), 
+        path: join(__dirname, '/i18n/'),
         watch: true,
       },
       resolvers: [
-        {
-          use: QueryResolver, options: ['lang']
-        },
-        AcceptLanguageResolver
-      ]
+        { use: QueryResolver, options: ['lang'] },
+        AcceptLanguageResolver,
+      ],
     }),
     ConfigModule.forRoot({
-      isGlobal: true
+      isGlobal: true,
     }),
     DatabaseModule,
-    ProductsModule
+    ProductsModule,
   ],
   controllers: [AppController],
   providers: [
     AppService,
     {
       provide: APP_PIPE,
-      useFactory: (i18n: I18nService) => new ValidationPipe({
-        transform: true,
-        whitelist: true,
-        exceptionFactory: (errors) => {
-          const errorMessages = errors.map(err => {
-            const property = err.property;
-            const constraints = Object.values(err.constraints || {});
-            return constraints.length ? constraints[0] : `Error: ${property}`;
-          });
-          return new Error(errorMessages.join(', '));
-        }
-      }),
-      inject: [I18nService],
-    }
+      useClass: ValidationPipe,
+    },
   ],
 })
 export class AppModule implements NestModule {

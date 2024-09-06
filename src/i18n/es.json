@@ -1,0 +1,11 @@
+{
+    "productNameRequired": "El nombre del producto es obligatorio.",
+    "productPriceRequired": "El precio del producto es obligatorio.",
+    "stockRequired": "La cantidad de productos en inventario es obligatoria.",
+    "productTypeNameRequired": "El nombre del tipo de producto es obligatorio.",
+    "createdProductSuccess": "El producto fue creado exitosamente,",
+    "mustBeNumber": "El valor de {property} debe ser un número.",
+    "minValueZero": "El valor mínimo de {property} debe ser: 0.",
+    "productTypeRequired": "El tipo de producto es obligatorio.",
+    "mustBeValidId": "{property} debe ser un id válido."
+}

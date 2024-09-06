@@ -1,0 +1,11 @@
+{
+    "productNameRequired": "The product name is required.",
+    "productPriceRequired": "Product price is required.",
+    "stockRequired": "The stock amount is requred.",
+    "productTypeNameRequired": "The product type name is required.",
+    "createdProductSuccess": "The product was created success.",
+    "mustBeNumber": "This value {property} must be a number.",
+    "minValueZero": "The min value of {property} must be 0.",
+    "productTypeRequired": "The product type is required.",
+    "mustBeValidId": "{property} must be a valid id."
+}
