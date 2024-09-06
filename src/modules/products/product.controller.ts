@@ -1,11 +1,11 @@
 import { Body, Controller, Get, Post, Put, Param, Delete, HttpCode, HttpStatus } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ProductService } from './product.service';
-import { CreateProductDto, UpdateProductDto } from './dto/product.dto';
+import { CreateProductDto, ProductDto, UpdateProductDto } from './dto/product.dto';
 import { Product } from './schemas/product.schema';
 import { ResponseApiDto } from 'src/common/dto/response-api.dto';
 
-@ApiTags('products')
+@ApiTags('Products')
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productService: ProductService) {}
@@ -20,14 +20,14 @@ export class ProductsController {
 
   @Get()
   @ApiOperation({ summary: 'Obtener todos los productos' })
-  @ApiResponse({ status: 200, description: 'Lista de productos', type: [Product] })
+  @ApiResponse({ status: 200, description: 'Lista de productos', type: [ProductDto] })
   async findAll(): Promise<Product[]> {
     return this.productService.findAll();
   }
 
   @Get(':id')
   @ApiOperation({ summary: 'Obtener un producto por ID' })
-  @ApiResponse({ status: 200, description: 'Producto encontrado.', type: Product })
+  @ApiResponse({ status: 200, description: 'Producto encontrado.', type: ProductDto })
   @ApiResponse({ status: 404, description: 'Producto no encontrado.' })
   async findOne(@Param('id') id: string): Promise<Product> {
     return this.productService.findOne(id);

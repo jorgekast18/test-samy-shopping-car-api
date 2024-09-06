@@ -4,7 +4,7 @@ import { ProductTypeService } from './product-type.service';
 import { CreateProductTypeDto } from './dto/product.dto';
 import { ProductType } from './schemas/product.schema';
 
-@ApiTags('product-types')
+@ApiTags('Products Types')
 @Controller('product-types')
 export class ProductTypesController {
   constructor(private readonly productTypeService: ProductTypeService) {}
