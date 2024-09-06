@@ -6,7 +6,7 @@ export class ProductCartDto {
       description: 'ID del producto que se va a agregar al carrito o modificar.',
       example: '60b8d295f1a2c34c7d1e8c4e',
     })
-    @IsNotEmpty({ message: 'productIdRequired'})
+    @IsNotEmpty({ message: 'productIsRequired'})
     @IsMongoId({ message: 'mustBeValidId'})
     productId: string;
   

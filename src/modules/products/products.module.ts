@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { Product, ProductSchema, ProductType, ProductTypeSchema } from './schemas/product.schema';
 import { MongooseModule } from '@nestjs/mongoose';
-import { I18nModule } from 'nestjs-i18n';
 import { ProductService } from './product.service';
 import { ProductsController } from './product.controller';
 import { ProductTypesController } from './produtc-type.controller';

@@ -5,7 +5,7 @@ import { ProductCartDto } from '../dto/product-cart.dto';
 
 @NestSchema()
 export class Cart extends Document {
-    @Prop({ required: true })
+    @Prop({ required: true, default: [] })
     items: ProductCartDto[];
 
     @Prop({ 
@@ -20,4 +20,4 @@ export class Cart extends Document {
 }
 
 export type CartDocument = Cart & Document;
-export const ProductSchema = SchemaFactory.createForClass(Cart);
+export const CartSchema = SchemaFactory.createForClass(Cart);

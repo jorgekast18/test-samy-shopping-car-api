@@ -6,7 +6,7 @@
     "mustBeNumber": "This value {property} must be a number.",
     "mustBeValidId": "{property} must be a valid id.",
     "productCartRequired": "Product is required.",
-    "productIdRequired": "The product id is required.",
+    "productIsRequired": "The product id is required.",
     "productNameRequired": "The product name is required.",
     "productNotFound": "Product not found.",
     "productPriceRequired": "Product price is required.",
@@ -15,5 +15,9 @@
     "productTypeRequired": "The product type is required.",
     "quantityProductsInCartRequired": "Quantity of products in car is required.",
     "stockRequired": "The stock amount is requred.",
-    "upadtedProduct": "Product was updated success."
+    "upadtedProduct": "Product was updated success.",
+    "cartCreatedSuccess": "Cart created success.",
+    "cartNotFound": "Cart not found.",
+    "insufficientsProducts": "The number of products you wish to add exceeds the number of products available",
+    "productAddedSuccess": "Product added success to cart."
 }
