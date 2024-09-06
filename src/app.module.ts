@@ -10,6 +10,7 @@ import { APP_PIPE } from '@nestjs/core';
 import { LocaleMiddleware } from './common/middleware/locale.middleware';
 import { ValidationPipe } from './common/pipes/validation.pipe'; // Ajusta la ruta según tu estructura
 import { CartModule } from './modules/cart/cart.module';
+import { BillModule } from './modules/bill/bill.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { CartModule } from './modules/cart/cart.module';
     DatabaseModule,
     ProductsModule,
     CartModule,
+    BillModule,
   ],
   controllers: [AppController],
   providers: [

@@ -1,4 +1,4 @@
-import { Schema, Document } from 'mongoose';
+import { Document } from 'mongoose';
 import { Prop, Schema as NestSchema, SchemaFactory } from '@nestjs/mongoose';
 import { CartState } from '../dto/cart-state.enum';
 import { ProductCartDto } from '../dto/product-cart.dto';
