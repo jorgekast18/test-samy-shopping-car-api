@@ -19,5 +19,6 @@
     "cartCreatedSuccess": "Cart created success.",
     "cartNotFound": "Cart not found.",
     "insufficientsProducts": "The number of products you wish to add exceeds the number of products available",
-    "productAddedSuccess": "Product added success to cart."
+    "productAddedSuccess": "Product added success to cart.",
+    "cartFinishedSuccess": "Cart was finished success."
 }

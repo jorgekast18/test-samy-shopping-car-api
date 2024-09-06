@@ -40,4 +40,11 @@ export class CartController {
         return this.cartService.addProduct(cartId, productCartDto);
     }
 
+    @Patch('finished/:id')
+    @ApiOperation({ summary: 'Cerrar un carrito de compra, cambia de estado para indicar que ya fue pagado y se convierte en factura'})
+    @ApiResponse({ status: 201, description: 'Carrito finalizado correctamente', type: CartDto})
+    async finishedCart(@Param('id') cartId: string): Promise<ResponseApiDto> {
+        return this.cartService.finishedCart(cartId);
+    }
+
 }

@@ -11,6 +11,7 @@ import { ProductService } from '../products/product.service';
 import { Product } from '../products/schemas/product.schema';
 import { canAddQuantityProductInCart, getIndexIfProductExistInCart } from './utils/utils-cart';
 import { CartState } from './dto/cart-state.enum';
+import { ProductDto } from '../products/dto/product.dto';
 
 @Injectable()
 export class CartService {
@@ -75,7 +76,7 @@ export class CartService {
         if(!canAddQuantityProductInCart(productCartToAdd, cart.items[indexProduct], productInDb))
             throw new BadRequestException(`${this.i18n.translate('insufficientsProducts')}`);
 
-        // If exist product in cart, sum quantity to product to add to product in cart
+        // If exist product in cart, sum quantity to product to add to product in cart if not add product to cart
         if(indexProduct > -1){
             cart.items[indexProduct].quantity += productCartToAdd.quantity;
             cart.items[indexProduct].total = cart.items[indexProduct].quantity * cart.items[indexProduct].price;
@@ -93,6 +94,29 @@ export class CartService {
             ok: true,
             statusCode: 200,
             message: `${this.i18n.translate('productAddedSuccess')}`,
+            data: cart
+          }
+        return response;
+    }
+
+    async finishedCart(cartId: string): Promise<ResponseApiDto> {
+        const cart: Cart = await this.findOne(cartId);
+
+        // Update state cart
+        cart.state = CartState.FINISHED;
+        await this.update(cartId, cart);
+
+        // Update every product stock in cart
+        if(cart.items.length > 0){
+            cart.items.map(async (product) => {
+                await this.productService.modifyStock(product)
+            })
+        }
+
+        const response: ResponseApiDto = {
+            ok: true,
+            statusCode: 200,
+            message: `${this.i18n.translate('cartFinishedSuccess')}`,
             data: cart
           }
         return response;

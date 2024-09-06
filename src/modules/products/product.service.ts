@@ -5,6 +5,7 @@ import { Product, ProductDocument } from './schemas/product.schema';
 import { CreateProductDto, UpdateProductDto } from './dto/product.dto';
 import { I18nService } from 'nestjs-i18n';
 import { ResponseApiDto } from 'src/common/dto/response-api.dto';
+import { ProductCartDto } from '../cart/dto/product-cart.dto';
 
 @Injectable()
 export class ProductService {
@@ -62,6 +63,18 @@ export class ProductService {
     const result = await this.productModel.findByIdAndDelete(id).exec();
     if (!result) {
       throw new NotFoundException(`${this.i18n.translate('productNotFound')}`);
+    }
+  }
+
+  async modifyStock(product: ProductCartDto): Promise<any> {
+    try {
+      const result = await this.productModel.updateOne(
+        { _id: product.productId},
+        { $inc: { stock: -product.quantity } }
+      )
+      return result; 
+    } catch (error) {
+      console.error('Error update stock:', error);
     }
   }
 }

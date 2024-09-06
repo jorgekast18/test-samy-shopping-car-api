@@ -5,7 +5,15 @@ meta {
 }
 
 patch {
-  url: http://localhost:3000/api/v1/cart/66db2381f1952b79d36e0c5a
-  body: none
+  url: http://localhost:3000/api/v1/cart/add-product/66db2381f1952b79d36e0c5a
+  body: json
   auth: none
+}
+
+body:json {
+  {
+    "productId": "66da69a38f743f87a991547f",
+    "quantity": 1,
+    "price": 50
+  }
 }
