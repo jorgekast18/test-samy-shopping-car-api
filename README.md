@@ -43,6 +43,52 @@ Once the server is running, you can make requests considering the following host
 
 `http://localhost:3000/api/v1`
 
+## Project Structure Folder
+
+- **`project-root/`**: The root directory of the project.
+  - **`Samy Shopping Car Api/`**: Contains the collections of bruno.
+  - **`src/`**: Contains the source code of the project.
+    - **`common/`**: Common code for all project.
+      - **`dto/`**: Common dto's.
+      - **`filters/`**: Common filters used in the project.
+      - **`middleware/`**: Common middleware used in the project.
+      - **`pipes/`**: Common pipes used in the project.
+      - **`validation/`**: Common validation used in the project.
+    - **`database/`**: Database config files.
+    - **`i18n/`**: International translate service, conatins json for en and es language.
+    - **`modules/`**: Modules projects.
+      - **`bill/`**: Bill module.
+        - **`dto/`**: Contain dto of bill module
+        - **`schema/`**: Contain schema model of bill module
+        - **`bill.controller.ts/`**: Bill controller
+        - **`bill.module.ts/`**: Bill module
+        - **`bill.service.ts/`**: Bill service
+      - **`cart/`**: Cart module.
+        - **`dto/`**: Contain dto of cart module
+        - **`schema/`**: Contain schema model of cart module
+        - **`utils/`**: Contain utils functions used for cart module
+        - **`cart.controller.ts/`**: Cart controller
+        - **`cart.module.ts/`**: cart module
+        - **`cart.service.ts/`**: cart service
+      - **`product/`**: product module.
+        - **`dto/`**: Contain dto of product module
+        - **`schema/`**: Contain schema model of product module
+        - **`product.controller.ts/`**: product controller
+        - **`product.module.ts/`**: product module
+        - **`product.service.ts/`**: product service
+    - **`main.ts`**: Main entry file for the application.
+  - **`test/`**: Contains tests.
+  - **`.gitignore`**: File that specifies which files should be ignored by Git.
+  - **`.docker-compose.yml`**: File that specifies setting for up docker services
+  - **`Dockerfile`**: File that specifies build docker images
+  - **`.env-example`**: File that specifies enviroment variables config
+  - **`.eslintrc.js`**: File that specifies config EsLint
+  - **`.prettierrc`**: File that specifies config of prettier
+  - **`.nest-cli.json`**: File that specifies config of nest cli
+  - **`.tsconfig.json`**: File that specifies config of typescript
+  - **`README.md`**: File with documentation project.
+  - **`package.json`**: Configuration file for npm (Node.js).
+
 ## Endpoints Doc
 
 - Swagger: It can be found at the url: `http://localhost:3000/api/v1/doc`.
