@@ -17,7 +17,7 @@ async function bootstrap() {
     .addServer('http://localhost:3000/api/v1')
     .build(); 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api/v1/', app, document);
+  SwaggerModule.setup('api/v1/doc', app, document);
   
   const i18nService = app.get(I18nService);
 
